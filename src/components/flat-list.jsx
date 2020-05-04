@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 
-import FlatCard from './flat.jsx';
+import Flat from './flat';
 
 class FlatList extends Component {
-  highlightFlat = (lat, lng) => {
-    this.props.selectFlat(lat, lng);
+  constructor(props) {
+    super(props)
   }
 
   renderList = () => {
-    return this.props.flats.map((flat) => {
-      return <FlatCard key={flat.name} highlightFlat={this.highlightFlat} ImageUrl={flat.imageUrl} price={flat.price} priceCurrency={flat.priceCurrency} name={flat.name} lat={flat.lat} lng={flat.lng} />
+    return this.props.flats.map((flat, index) => {
+      return <Flat
+      key={flat.name}
+      id={index}
+      flat={flat}
+      selected={flat.name === this.props.selectedFlat.name}
+      selectFlat={this.props.selectFlat}/>
     });
   }
 
